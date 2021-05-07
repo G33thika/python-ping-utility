@@ -66,6 +66,7 @@ while True:
         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         stime = time.time()
         s.sendto(packet,(dstad, 1))
+        s.close()
 
         class IP(Structure):
             _fields_ = [
@@ -115,6 +116,7 @@ while True:
         recv_sock.bind(('ens33', 0))
         recv_sock.settimeout(5)
         recv_data = recv_sock.recvfrom(65536)[0]
+        recv_sock.close()
         icmp = ICMP(recv_data[34:])
      
         #filter icmp reply =======================================================
@@ -135,6 +137,8 @@ while True:
         print("Request timeout .....")
         pass
     except KeyboardInterrupt:
+        s.close()
+        recv_sock.close()
         print ("\n",f"{pack_count} packets transmitted, {rcv_count} received,")
         print (" {:.0%} successful".format(rcv_count/pack_count))
         print (" exiting....")
