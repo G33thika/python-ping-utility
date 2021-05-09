@@ -1,7 +1,6 @@
 import socket 
 import time
 import sys
-import netifaces
 from ctypes import *
 from struct import *
 
