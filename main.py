@@ -115,7 +115,7 @@ while True:
         recv_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         recv_sock.bind(('ens33', 0))
         recv_sock.settimeout(5)
-        recv_data = recv_sock.recvfrom(65536)[0]
+        recv_data = recv_sock.recv(65536)
         recv_sock.close()
         icmp = ICMP(recv_data[34:])
      
